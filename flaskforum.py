@@ -1,14 +1,17 @@
 from flask import Flask, render_template, url_for, flash, redirect
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import backref
+from wtforms.validators import Email
+#from models import User
 from form import RegisterForm, LoginForm
 from datetime import datetime
+from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] ='f00ee7583d29d7804578909a4ee52b96'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///forum.db'
 db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -31,8 +34,6 @@ class Post(db.Model):
     def __repr__(self):
         return f"Post('{self.title}', {self.date_posted})"
 
-
-
 @app.route("/")
 def home():
     return render_template('home.html')
@@ -41,8 +42,12 @@ def home():
 def register():
     form = RegisterForm()
     if(form.validate_on_submit()):
-        flash(f'Created account for {form.username.data}', 'success')
-        return redirect(url_for('home'))
+        hashed_pass = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(username=form.username.data, email=form.email.data, password=hashed_pass)
+        db.session.add(user)
+        db.session.commit()
+        flash(f'Created account for {form.username.data}. You can now log in.', 'success')
+        return redirect(url_for('login'))
     return render_template('register.html', title="Register", form=form)
 
 @app.route("/login", methods=['GET', 'POST'])
