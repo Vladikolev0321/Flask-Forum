@@ -13,6 +13,15 @@ def home():
 def register():
     form = RegisterForm()
     if(form.validate_on_submit()):
+        user = User.query.filter_by(username=form.username.data).first()
+        if(user):
+            flash('That username is taken. Choose another one.', 'danger')
+            return redirect(url_for('register'))
+        user2 = User.query.filter_by(email=form.email.data).first()
+        if(user2):
+            flash('That email is taken. Choose another one.', 'danger')
+            return redirect(url_for('register'))
+
         hashed_pass = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = User(username=form.username.data, email=form.email.data, password=hashed_pass)
         db.session.add(user)
