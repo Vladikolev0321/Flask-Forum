@@ -2,4 +2,5 @@ requirements2.txt
 nav.html
 todo.txt
 venv_test
-venv
+__pycache__
+.vscode
