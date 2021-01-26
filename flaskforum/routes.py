@@ -1,14 +1,16 @@
+from operator import pos
 from flask import render_template, url_for, flash, redirect, request
 from flaskforum import app
-from flaskforum.form import RegisterForm, LoginForm
+from flaskforum.form import RegisterForm, LoginForm, PostForm
 from flaskforum.models import User, Post
-from flaskforum.__init__ import bcrypt
-from flaskforum.__init__ import db
+from flaskforum import bcrypt
+from flaskforum import db
 from flask_login import login_user, current_user, logout_user, login_required
 
 @app.route("/")
 def home():
-    return render_template('home.html')
+    posts = Post.query.all()
+    return render_template('home.html', posts=posts)
 
 @app.route("/register", methods=['GET','POST'])
 def register():
@@ -58,3 +60,20 @@ def logout():
 @login_required
 def logged_in():
     return render_template('logged_in.html', title="My account")
+
+@app.route("/make_post", methods=['GET', 'POST'])
+@login_required
+def make_post():
+    form = PostForm()
+    if(form.validate_on_submit()):
+        post = Post(title=form.title.data, content=form.content.data, uploader=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post has been created', 'success')
+        return redirect(url_for('home'))
+    return render_template('make_post.html', title='New post', form=form)
+
+@app.route("/post/<int:post_id>", methods=['GET', 'POST'])
+def post():
+    post = Post.query.get(post_id)
+    return render_template('post.html', title=post.title, post=post)
