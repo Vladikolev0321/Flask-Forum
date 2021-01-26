@@ -74,6 +74,10 @@ def make_post():
     return render_template('make_post.html', title='New post', form=form)
 
 @app.route("/post/<int:post_id>", methods=['GET', 'POST'])
-def post():
+def post(post_id):
     post = Post.query.get(post_id)
     return render_template('post.html', title=post.title, post=post)
+
+@app.route("/not_finished")
+def not_finished():
+    return render_template('notfinished.html', title="Not Finished")
