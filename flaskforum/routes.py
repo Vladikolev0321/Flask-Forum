@@ -1,16 +1,16 @@
 from operator import pos
 from flask import render_template, url_for, flash, redirect, request
 from flaskforum import app
-from flaskforum.form import RegisterForm, LoginForm, PostForm
-from flaskforum.models import User, Post
+from flaskforum.form import RegisterForm, LoginForm, PostForm, TopicForm
+from flaskforum.models import User, Post, Topic
 from flaskforum import bcrypt
 from flaskforum import db
 from flask_login import login_user, current_user, logout_user, login_required
 
 @app.route("/")
 def home():
-    posts = Post.query.all()
-    return render_template('home.html', posts=posts)
+    topics = Topic.query.all()
+    return render_template('home.html', topics=topics)
 
 @app.route("/register", methods=['GET','POST'])
 def register():
@@ -61,22 +61,22 @@ def logout():
 def logged_in():
     return render_template('logged_in.html', title="My account")
 
-@app.route("/make_post", methods=['GET', 'POST'])
+@app.route("/make_topic", methods=['GET', 'POST'])
 @login_required
-def make_post():
-    form = PostForm()
+def make_topic():
+    form = TopicForm()
     if(form.validate_on_submit()):
-        post = Post(title=form.title.data, content=form.content.data, uploader=current_user)
-        db.session.add(post)
+        topic = Topic(title=form.title.data, description=form.description.data)
+        db.session.add(topic)
         db.session.commit()
-        flash('Your post has been created', 'success')
+        flash('Your topic has been created', 'success')
         return redirect(url_for('home'))
     return render_template('make_post.html', title='New post', form=form)
 
-@app.route("/post/<int:post_id>", methods=['GET', 'POST'])
-def post(post_id):
-    post = Post.query.get(post_id)
-    return render_template('post.html', title=post.title, post=post)
+@app.route("/topic/<int:topic_id>", methods=['GET', 'POST'])
+def topic(topic_id):
+    topic = Topic.query.get(topic_id)
+    return render_template('topic.html', title=topic.title, topic=topic)
 
 @app.route("/not_finished")
 def not_finished():

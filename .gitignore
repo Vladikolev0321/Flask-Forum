@@ -3,5 +3,6 @@ nav.html
 todo.txt
 venv_test
 venv
-__pycache__
+__pycache__/
 .vscode/
+for_later/

@@ -40,4 +40,15 @@ class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     content = TextAreaField('Content', validators=[DataRequired()])
     submit = SubmitField('Post')
+    
+class TopicForm(FlaskForm):
+	title = StringField('Title', validators=[DataRequired()])
+	description = StringField('Description', validators=[DataRequired()])	
+	submit = SubmitField('Create topic')
+
+
+
+
+
+
 

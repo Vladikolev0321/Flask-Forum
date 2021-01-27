@@ -1,15 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
-    {% for post in posts %}
+    {% for topic in topics %}
     <div class="border border-info border-3 rounded" style="margin-top:5px">
         <article class="media content-section">
           <div class="media-body">
-            <div class="article-metadata">
-              <a class="mr-2" href="#">{{ post.uploader.username }}</a>
-              <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
-            </div>
-            <h2><a class="article-title" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
-            <p class="article-content">{{ post.content }}</p>
+            <h2><a class="article-title" href="{{ url_for('topic', topic_id=topic.id) }}">{{ topic.title }}</a></h2>
+            <p class="article-content">{{ topic.description }}</p>
           </div>
         </article>
     </div>
