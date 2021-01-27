@@ -23,7 +23,7 @@ class Topic(db.Model):
 	posts = db.relationship('Post', backref= 'current_topic', lazy=True)
 	
 	def __repr__(self):
-	    return f"Post('{self.title}', {self.description})"
+	    return f"Topic('{self.title}', {self.description})"
 
 
 class Post(db.Model):

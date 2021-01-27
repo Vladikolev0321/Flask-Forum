@@ -71,13 +71,28 @@ def make_topic():
         db.session.commit()
         flash('Your topic has been created', 'success')
         return redirect(url_for('home'))
-    return render_template('make_post.html', title='New post', form=form)
+    return render_template('make_topic.html', title='New Topic', form=form)
 
 @app.route("/topic/<int:topic_id>", methods=['GET', 'POST'])
 def topic(topic_id):
     topic = Topic.query.get(topic_id)
-    return render_template('topic.html', title=topic.title, topic=topic)
+    posts = Post.query.all()
+    #get all posts by topic id here not in the html
+    return render_template('topic.html', title=topic.title, topic=topic, posts=posts)
 
 @app.route("/not_finished")
 def not_finished():
     return render_template('notfinished.html', title="Not Finished")
+
+@app.route("/topic/<int:topic_id>/make_post", methods=['GET', 'POST'])
+@login_required
+def make_post(topic_id):
+    form = PostForm()
+    if(form.validate_on_submit()):
+        curr_topic = Topic.query.get(topic_id)
+        post = Post(title=form.title.data, content=form.content.data, uploader=current_user, current_topic=curr_topic)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post has been created', 'success')
+        return redirect(url_for('topic', topic_id=topic_id))
+    return render_template('make_post.html', title='New Post', form=form)

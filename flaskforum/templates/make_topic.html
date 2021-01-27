@@ -4,14 +4,14 @@
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">New post</legend>
+            <legend class="border-bottom mb-4">New topic</legend>
             <div class="form-group">
                 {{ form.title.label(class="form-control-label") }}
                 {{ form.title(class="form-control form-control-lg") }}
             </div>
             <div class="form-group">
-                {{ form.content.label(class="form-control-label") }}
-                {{ form.content(class="form-control form-control-lg") }}
+                {{ form.description.label(class="form-control-label") }}
+                {{ form.description(class="form-control form-control-lg") }}
             </div>
         </fieldset>
         <div class="form-group">

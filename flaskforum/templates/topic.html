@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+    <a class="btn btn-primary" style="margin-bottom:20px" href="{{ url_for('make_post', topic_id=topic.id) }}" role="button">Create Post</a>
     <div class="border border-info border-3 rounded">
         <article class="media content-section">
           <div class="media-body">
@@ -8,4 +9,22 @@
           </div>
         </article>
     </div>
+    <h2>Posts related to this subject:</h2>
+    {% for post in posts %}
+      {% if post.topic_id == topic.id %}
+        <div class="border border-info border-3 rounded" style="margin-top:5px">
+          <article class="media content-section">
+            <div class="media-body">
+              <div class="article-metadata">
+                <a class="mr-2" href="#">{{ post.uploader.username }}</a>
+                <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+              </div>
+              <!---to add href-->
+              <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+              <p class="article-content">{{ post.content }}</p>
+            </div>
+          </article>
+        </div>
+      {% endif %}
+    {% endfor %}
 {% endblock %}
