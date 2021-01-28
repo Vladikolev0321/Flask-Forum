@@ -76,9 +76,9 @@ def make_topic():
 @app.route("/topic/<int:topic_id>", methods=['GET', 'POST'])
 def topic(topic_id):
     topic = Topic.query.get(topic_id)
-    posts = Post.query.all()
+    #posts = Post.query.all()
     #get all posts by topic id here not in the html
-    return render_template('topic.html', title=topic.title, topic=topic, posts=posts)
+    return render_template('topic.html', title=topic.title, topic=topic, posts=topic.posts)
 
 @app.route("/not_finished")
 def not_finished():

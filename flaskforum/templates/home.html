@@ -4,7 +4,7 @@
     <div class="card" style="margin-top:5px">
         <article class="media content-section">
           <div class="media-body">
-            <h2><a class="article-title" href="{{ url_for('topic', topic_id=topic.id) }}" style = "margin-left:3px">{{ topic.title }}</a></h2>
+            <h2><a class="article-title remove_link_colour" href="{{ url_for('topic', topic_id=topic.id) }}" style = "margin-left:3px">{{ topic.title }}</a></h2>
             <p class="article-content" style = "margin-left:3px">{{ topic.description }}</p>
           </div>
         </article>

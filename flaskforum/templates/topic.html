@@ -14,7 +14,6 @@
     <br>
     <h2>Posts related to this subject:</h2>
     {% for post in posts %}
-      {% if post.topic_id == topic.id %}
         <div class="card" style="margin-top:5px">
           <article class="media content-section">
             <div class="media-body">
@@ -23,11 +22,9 @@
                 <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
               </div>
               <!---to add href-->
-              <h2><a class="article-title" href="{{ url_for('post', post_id=post.id) }}" style = "margin-left:2px">{{ post.title }}</a></h2>
-              <p class="article-content" style = "margin-left:2px">{{ post.content }}</p>
+              <h2><a class="article-title remove_link_colour" href="{{ url_for('post', post_id=post.id) }}" style = "margin-left:2px">{{ post.title }}</a></h2>
             </div>
           </article>
         </div>
-      {% endif %}
     {% endfor %}
 {% endblock %}

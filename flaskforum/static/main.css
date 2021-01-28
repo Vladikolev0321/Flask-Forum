@@ -3,6 +3,13 @@ body {
     color: #333333;
     margin-top: 5rem;
   }
-  
+
+.remove_link_colour {
+    color: inherit;
+}
+
+.text_limit{
+  overflow: hidden;
+}
  
  
