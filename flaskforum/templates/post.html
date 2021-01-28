@@ -1,11 +1,15 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="border border-info border-3 rounded">
-        <article class="media content-section">
-          <div class="media-body">
-            <h2 class="article-title" >{{ topic.title }}</h2>
-            <p class="article-content">{{ topic.description }}</p>
+	<article class="media content-section">
+		<div class="media-body">
+			<div class="article-metadata">
+		<a class="mr-2" >{{ post.uploader.username }}</a>
+		<small class="text muted">
+            <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
           </div>
+          <h2 class="article-title">{{ post.title }}</h2>
+              <p class="article-content">{{ post.content }}</p>
         </article>
     </div>
 {% endblock %}
+
