@@ -1,9 +1,9 @@
 # Flask Forum
 Making Forum web application using Flask for the subject in school - Software Development
 
-## How to run the porject on your system
+## How to run the project on your system
 
-If you do not have virtual environment installed, you can do it by installing the python3-venv package:
+If you don't have virtual environment installed, you can do it by installing the python3-venv package:
 
 ```bash
 sudo apt install python3-venv
@@ -32,4 +32,7 @@ And lastly, you need to start the server:
 ```bash
 python run.py
 ```
+# Made by:
+    Vladislav Kolev - [Vladikolev0321](https://github.com/Vladikolev0321)
+    Martin Vrachev - [mvvrachev](https://github.com/mvvrachev)
 
