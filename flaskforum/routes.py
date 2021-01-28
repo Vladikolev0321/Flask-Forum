@@ -131,6 +131,11 @@ def delete_post(post_id):
     db.session.commit()
     flash('Your post has been deleted!', 'success')
     return redirect(url_for('home'))
+    
+@app.route("/about")
+def about():
+    return render_template('about.html', title="About page")
+    
 
 
 

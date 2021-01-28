@@ -1,27 +1,30 @@
 {% extends "layout.html" %}
 {% block content %}
-    <a class="btn btn-primary" style="margin-bottom:20px" href="{{ url_for('make_post', topic_id=topic.id) }}" role="button">Create Post</a>
-    <div class="border border-info border-3 rounded">
+   
+    <div>
         <article class="media content-section">
           <div class="media-body">
-            <h2 class="article-title" >{{ topic.title }}</h2>
+            <h1 class="article-title" >{{ topic.title }}</h1>
             <p class="article-content">{{ topic.description }}</p>
           </div>
         </article>
     </div>
+     <a class="btn btn-primary" style="margin-bottom:20px" href="{{ url_for('make_post', topic_id=topic.id) }}" role="button">Create Post</a>
+    <br>
+    <br>
     <h2>Posts related to this subject:</h2>
     {% for post in posts %}
       {% if post.topic_id == topic.id %}
-        <div class="border border-info border-3 rounded" style="margin-top:5px">
+        <div class="card" style="margin-top:5px">
           <article class="media content-section">
             <div class="media-body">
               <div class="article-metadata">
-                <a class="mr-2" href="#">{{ post.uploader.username }}</a>
+                <a class="mr-2" style = "margin-left:3px">{{ post.uploader.username }}</a>
                 <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
               </div>
               <!---to add href-->
-              <h2><a class="article-title" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
-              <p class="article-content">{{ post.content }}</p>
+              <h2><a class="article-title" href="{{ url_for('post', post_id=post.id) }}" style = "margin-left:2px">{{ post.title }}</a></h2>
+              <p class="article-content" style = "margin-left:2px">{{ post.content }}</p>
             </div>
           </article>
         </div>
