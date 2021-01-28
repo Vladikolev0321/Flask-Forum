@@ -32,7 +32,8 @@ And lastly, you need to start the server:
 ```bash
 python run.py
 ```
-# Made by:
-    Vladislav Kolev - [Vladikolev0321](https://github.com/Vladikolev0321)
-    Martin Vrachev - [mvvrachev](https://github.com/mvvrachev)
+## Made by:
+
+Vladislav Kolev - [Vladikolev0321](https://github.com/Vladikolev0321)
+Martin Vrachev - [mvvrachev](https://github.com/mvvrachev)
 
